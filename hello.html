@@ -12,10 +12,20 @@
            url: url,
            success: function(data){
              STORIES = data;
+             var dict = {}
              var elements = STORIES.elements;
              for (i in elements) {
-              console.log(elements[i].author.name);
+               var name = elements[i].author.name;
+               console.log(name)
+               if (dict[name]) {
+                 dict[name]++;
+               }else{
+                 dict[name]=1;
+               };
              };             
+             for (i in dict){
+               console.log(i, dict[i]);
+             }
              
              function drawVisualization() {
                // Create and populate the data table.
