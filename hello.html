@@ -23,9 +23,6 @@
                  dict[name]=1;
                };
              };             
-             for (i in dict){
-               console.log(i, dict[i]);
-             }
              
              function drawVisualization() {
                // Create and populate the data table.
@@ -34,9 +31,10 @@
                data.addColumn('string', 'Parent');
                data.addColumn('number', 'frequency');
                var rows = [["Hashtags",null,0]]
-               rows.push(['america', "Hashtags", 20]);
-               rows.push(['europe', "Hashtags", 10]);
-               rows.push(['asia', "Hashtags", 1]);
+               for (i in dict){
+                 rows.push([i, "Hashtags", dict[i]]);
+               }
+               
                data.addRows(rows);
                var treemap = new google.visualization.TreeMap(document.getElementById('visualization'));
                treemap.draw(data, {
