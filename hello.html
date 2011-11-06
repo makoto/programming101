@@ -5,20 +5,17 @@
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
      <script>
        $(document).ready(function(){
-         var url = "http://api.storify.com/v1/stories/storifydev";
+         var url = "http://storify.com/storifydev/-mozfest-social-media-highlight-day-2-.json";
          $.ajax({
            type: 'GET',
            dataType: 'jsonp',
            url: url,
            success: function(data){
              STORIES = data;
-             console.log(data);
-             var quotes = STORIES.content.stories[0].meta.quoted;
-             for (var i=0; i < quotes.length; i++) {
-              console.log(quotes[i].username);
+             var elements = STORIES.elements;
+             for (i in elements) {
+              console.log(elements[i].author.name);
              };             
-             
-             $('#hello').append(STORIES.content.stories[0].permalink)
              
              function drawVisualization() {
                // Create and populate the data table.
