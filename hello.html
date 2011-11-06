@@ -13,6 +13,11 @@
            success: function(data){
              STORIES = data;
              console.log(data);
+             var quotes = STORIES.content.stories[0].meta.quoted;
+             for (var i=0; i < quotes.length; i++) {
+              console.log(quotes[i].username);
+             };             
+             
              $('#hello').append(STORIES.content.stories[0].permalink)
              
              function drawVisualization() {
