@@ -2,6 +2,7 @@
 <head>
     // <script type="text/javascript"  src="./jquery.js" ></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
      <script>
        $(document).ready(function(){
          var url = "http://api.storify.com/v1/stories/storifydev";
@@ -12,6 +13,29 @@
            success: function(data){
              STORIES = data;
              console.log(data);
+             $('#hello').append(STORIES.content.stories[0].permalink)
+             
+             function drawVisualization() {
+               // Create and populate the data table.
+               var data = new google.visualization.DataTable();
+               data.addColumn('string', 'Hashtag');
+               data.addColumn('string', 'Parent');
+               data.addColumn('number', 'frequency');
+               var rows = [["Hashtags",null,0]]
+               rows.push(['america', "Hashtags", 20]);
+               rows.push(['europe', "Hashtags", 10]);
+               rows.push(['asia', "Hashtags", 1]);
+               data.addRows(rows);
+               var treemap = new google.visualization.TreeMap(document.getElementById('visualization'));
+               treemap.draw(data, {
+                 minColor: 'red',
+                 midColor: '#ddd',
+                 maxColor: '#0d0',
+                 headerHeight: 15,
+                 fontColor: 'black',
+                 showScale: true});
+             }
+             google.load('visualization', '1', {packages:['treemap'], callback:drawVisualization});
            }
          });
        });
@@ -26,6 +50,11 @@
   <div id="canvas">
     canvas
   </div>
+  <div id="">
+    <div id="visualization" style="width: 600px; height: 400px; margin-left: 200px;"></div>
+  </div>
+  
+  
 </body>
 
 </html>
